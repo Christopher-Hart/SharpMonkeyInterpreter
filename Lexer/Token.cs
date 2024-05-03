@@ -28,9 +28,9 @@ public class TokenConstants
 public class Token
 {
     public TokenType Type;
-    public string Literal;
+    public char Literal;
 
-    public Token(TokenType input_type, string input_literal)
+    public Token(TokenType input_type, char input_literal)
     {
         Type = input_type;
         Literal = input_literal;
