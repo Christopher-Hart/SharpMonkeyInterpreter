@@ -1,16 +1,14 @@
-using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
-using System.Runtime.CompilerServices;
-
 namespace Lexer;
 
 public class Lexer
 {
+    //Members
     private string input;
     private int position;
     private int readPosition;
     private char character;
 
+    //Constructor
     public Lexer(string input)
     {
         position = 0;
@@ -44,47 +42,47 @@ public class Lexer
         switch (character)
         {
             case '=':
-                token = new(TokenConstants.ASSIGN, character);
+                token = new(Token.ASSIGN, character);
                 break;
             case ';':
-                token = new(TokenConstants.SEMICOLON, character);
+                token = new(Token.SEMICOLON, character);
                 break;
             case '(':
-                token = new(TokenConstants.L_PAREN, character);
+                token = new(Token.L_PAREN, character);
                 break;
             case ')':
-                token = new(TokenConstants.R_PAREN, character);
+                token = new(Token.R_PAREN, character);
                 break;
             case ',':
-                token = new(TokenConstants.COMMA, character);
+                token = new(Token.COMMA, character);
                 break;
             case '+':
-                token = new(TokenConstants.PLUS, character);
+                token = new(Token.PLUS, character);
                 break;
             case '{':
-                token = new(TokenConstants.L_BRACE, character);
+                token = new(Token.L_BRACE, character);
                 break;
             case '}':
-                token = new(TokenConstants.R_BRACE, character);
+                token = new(Token.R_BRACE, character);
                 break;
             case '\0':
-                token = new(TokenConstants.EOF, '\0');
+                token = new(Token.EOF, '\0');
                 break;
             default:
                 if (IsLetter(character))
                 {
                     string identifier = ReadIdentifer();
-                    token = new(TokenUtils.GetTokenType(identifier),identifier);
+                    token = new(Token.GetTokenType(identifier), identifier);
                     return token;
                 }
                 else if (IsDigit(character))
                 {
-                    token = new(TokenConstants.INT,ReadInt());
+                    token = new(Token.INT, ReadInt());
                     return token;
                 }
                 else
                 {
-                    token = new(TokenConstants.ILLEGAL, character);
+                    token = new(Token.ILLEGAL, character);
                 }
                 break;
         }
