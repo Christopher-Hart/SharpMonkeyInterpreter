@@ -33,6 +33,18 @@ public class Lexer
         readPosition++;
     }
 
+    private char PeekChar()
+    {
+        if (readPosition >= input.Length)
+        {
+            return '\0';
+        }
+        else
+        {
+            return input[readPosition];
+        }
+    }
+
     public Token NextToken()
     {
         Token token;
@@ -42,7 +54,43 @@ public class Lexer
         switch (character)
         {
             case '=':
-                token = new(Token.ASSIGN, character);
+                if (PeekChar() == '=')
+                {
+                    char ch = character;
+                    ReadChar();
+                    token = new(Token.EQUAL, ch.ToString() + character.ToString());
+                }
+                else
+                {
+                    token = new(Token.ASSIGN, character);
+                }
+                break;
+            case '-':
+                token = new(Token.MINUS, character);
+                break;
+            case '!':
+                if (PeekChar() == '=')
+                {
+                    char ch = character;
+                    ReadChar();
+                    token = new(Token.NOT_EQUAL, ch.ToString() + character.ToString());
+                }
+                else
+                {
+                    token = new(Token.BANG, character);
+                }
+                break;
+            case '*':
+                token = new(Token.ASTRISK, character);
+                break;
+            case '/':
+                token = new(Token.SLASH, character);
+                break;
+            case '<':
+                token = new(Token.LT, character);
+                break;
+            case '>':
+                token = new(Token.GT, character);
                 break;
             case ';':
                 token = new(Token.SEMICOLON, character);
@@ -98,7 +146,7 @@ public class Lexer
 
     private bool IsDigit(char ch)
     {
-        return ('0' >= ch) || (ch <= '9');
+        return ('0' <= ch) && (ch <= '9');
     }
 
     private void SkipWhitespace()
@@ -108,6 +156,7 @@ public class Lexer
             ReadChar();
         }
     }
+
     private string ReadIdentifer()
     {
         int starting_position = position;

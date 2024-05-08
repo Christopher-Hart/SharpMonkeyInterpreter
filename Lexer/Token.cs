@@ -11,18 +11,31 @@ public class Token
     public const string INT = "INT";
     public const string IDENT = "IDENT";
     //Operators
-    public const string ASSIGN = "ASSIGN";
-    public const string PLUS = "PLUS";
+    public const string ASSIGN = "=";
+    public const string PLUS = "+";
+    public const string MINUS = "-";
+    public const string BANG = "!";
+    public const string ASTRISK = "*";
+    public const string SLASH = "/";
+    public const string LT = "<";
+    public const string GT = ">";
+    public const string EQUAL = "==";
+    public const string NOT_EQUAL = "!=";
     //Delimiters
-    public const string COMMA = "COMMA";
-    public const string SEMICOLON = "SEMICOLON";
-    public const string L_PAREN = "L_PAREN";
-    public const string R_PAREN = "R_PAREN";
-    public const string L_BRACE = "L_BRACE";
-    public const string R_BRACE = "R_BRACE";
+    public const string COMMA = ",";
+    public const string SEMICOLON = ";";
+    public const string L_PAREN = "(";
+    public const string R_PAREN = ")";
+    public const string L_BRACE = "{";
+    public const string R_BRACE = "}";
     //Keywords
     public const string FUNCTION = "FUNCTION";
     public const string LET = "LET";
+    public const string TRUE = "TRUE";
+    public const string FALSE = "FALSE";
+    public const string IF = "IF";
+    public const string ELSE = "ELSE";
+    public const string RETURN = "RETURN";
 
     //Members
     public TokenType Type;
@@ -44,7 +57,12 @@ public class Token
     private static readonly Dictionary<string, TokenType> GetKeyword = new()
     {
         {"fn",FUNCTION},
-        {"let",LET}
+        {"let",LET},
+        {"true",TRUE},
+        {"false",FALSE},
+        {"if",IF},
+        {"else",ELSE},
+        {"return",RETURN}
     };
 
     public static TokenType GetTokenType(string literal)
